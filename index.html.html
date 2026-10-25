@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Medam Ji 💗</title>
+<style>
+  :root{
+    --pink:#ff7eae; --deep:#e84d88; --pale:#fff0f6; --white:#fffdfd;
+    --text:#67364b; --muted:#986b7e; --shadow:0 18px 55px rgba(221,85,139,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; min-height:100vh; overflow-x:hidden; color:var(--text);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    background:radial-gradient(circle at 15% 10%,#fff 0,transparent 28%),
+      linear-gradient(135deg,#fff7fb,#ffe5ef 50%,#fff9fc);
+  }
+  button{font:inherit}
+  .petals,.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .petal{position:absolute;top:-12vh;animation:fall linear infinite;opacity:.75;font-size:20px}
+  @keyframes fall{to{transform:translate3d(70px,115vh,0) rotate(420deg);opacity:.1}}
+  .heart-float{position:absolute;bottom:-10vh;animation:rise linear infinite;opacity:.55}
+  @keyframes rise{to{transform:translateY(-120vh) rotate(25deg);opacity:0}}
+  .topline{position:relative;z-index:1;text-align:center;padding:20px 12px 0;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:#b56b8a}
+  .progress-wrap{position:relative;z-index:1;width:min(560px,88%);height:6px;background:#f8c9dc;border-radius:99px;margin:14px auto 0;overflow:hidden}
+  .progress{height:100%;width:20%;background:linear-gradient(90deg,#ff9fc2,#e94f8b);border-radius:99px;transition:width .5s}
+  main{position:relative;z-index:1;min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:28px 16px 54px}
+  .card{
+    width:min(720px,100%);min-height:490px;background:rgba(255,255,255,.83);
+    border:1px solid rgba(255,255,255,.95);border-radius:30px;padding:clamp(24px,5vw,48px);
+    box-shadow:var(--shadow);backdrop-filter:blur(12px);text-align:center;position:relative;overflow:hidden;
+  }
+  .card:before,.card:after{content:"✿";position:absolute;color:#ffd0e1;font-size:90px;opacity:.5;pointer-events:none}
+  .card:before{top:-20px;left:8px;transform:rotate(-20deg)}
+  .card:after{bottom:-28px;right:10px;transform:rotate(20deg)}
+  .layer{display:none;animation:enter .55s ease both;position:relative;z-index:1}
+  .layer.active{display:block}
+  @keyframes enter{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+  .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#d66d98;font-weight:800;margin:0 0 14px}
+  h1{font-family:Georgia,serif;font-weight:500;line-height:1.12;font-size:clamp(2.2rem,7vw,4rem);margin:8px 0 18px;color:#b83e72}
+  h2{font-family:Georgia,serif;font-weight:500;font-size:clamp(1.8rem,5vw,2.7rem);margin:10px 0 18px;color:#b83e72}
+  p{font-size:1.05rem;line-height:1.8;color:#80566a;margin:12px auto;max-width:570px}
+  .small{font-size:.9rem;color:var(--muted)}
+  .flower-hero{font-size:clamp(3.4rem,10vw,6rem);margin:12px 0;filter:drop-shadow(0 8px 10px #ffc4db);animation:sway 3s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg) translateY(-5px)}}
+  .btn-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+  .btn{border:0;border-radius:999px;padding:13px 23px;cursor:pointer;font-weight:800;transition:transform .18s,box-shadow .18s;background:linear-gradient(135deg,#ff91b9,#e84d88);color:white;box-shadow:0 9px 22px rgba(232,77,136,.22)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(232,77,136,.3)}
+  .btn.secondary{background:#fff0f6;color:#b83e72;border:1px solid #ffd0e1;box-shadow:none}
+  .tiny-note{font-size:.8rem;color:#b17a91;margin-top:20px}
+  .envelope-wrap{height:190px;display:flex;align-items:center;justify-content:center;margin:18px 0}
+  .envelope{position:relative;width:230px;height:145px;border:0;background:transparent;cursor:pointer;filter:drop-shadow(0 12px 10px rgba(190,70,120,.15));transition:transform .25s}
+  .envelope:hover{transform:translateY(-5px) rotate(-1deg)}
+  .env-back{position:absolute;inset:12px 0 0;background:#ffc3d9;border-radius:10px}
+  .env-paper{position:absolute;left:18px;right:18px;top:0;height:115px;background:#fffdfd;border-radius:8px;transition:transform .6s;box-shadow:0 2px 8px #e9a4bf}
+  .env-paper span{display:block;padding-top:30px;font-family:Georgia,serif;color:#c34c7b;font-size:1.1rem}
+  .env-front{position:absolute;inset:12px 0 0;background:#ff9fc2;clip-path:polygon(0 0,50% 62%,100% 0,100% 100%,0 100%);border-radius:0 0 10px 10px}
+  .env-flap{position:absolute;top:12px;left:0;width:100%;height:75px;background:#ffb3cf;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s}
+  .envelope.open .env-flap{transform:rotateX(180deg)}
+  .envelope.open .env-paper{transform:translateY(-52px)}
+  .letter{display:none;margin:16px auto 0;padding:20px 22px;background:#fff7fb;border:1px dashed #f3a5c4;border-radius:18px;text-align:left;max-width:560px}
+  .letter.show{display:block;animation:enter .5s ease both}
+  .letter p{font-size:1rem}
+  .quote{font-family:Georgia,serif;font-size:clamp(1.25rem,4vw,1.65rem);font-style:italic;line-height:1.55;color:#b83e72;padding:12px 0}
+  .memory-box{background:linear-gradient(135deg,#fff4f8,#ffe2ed);border-radius:22px;padding:20px;margin:22px auto;max-width:530px;border:1px solid #ffccdf}
+  .memory-box .emoji{font-size:2rem}
+  .gift-area{margin:20px auto 8px;height:175px;display:flex;justify-content:center;align-items:center}
+  .gift{position:relative;width:140px;height:112px;border:0;background:transparent;cursor:pointer;transition:transform .2s;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .gift:hover{transform:scale(1.06)}
+  .gift .box{position:absolute;bottom:0;left:5px;width:130px;height:80px;background:#ff8fb8;border-radius:8px;box-shadow:inset -8px -5px rgba(193,49,107,.08)}
+  .gift .lid{position:absolute;top:22px;left:0;width:140px;height:27px;background:#e95a91;border-radius:7px;transition:transform .4s}
+  .gift .ribbon{position:absolute;top:22px;bottom:0;left:58px;width:25px;background:#fff0f6}
+  .gift .bow{position:absolute;top:2px;left:42px;width:26px;height:23px;border:7px solid #fff0f6;border-radius:50% 50% 5px 50%;transform:rotate(20deg)}
+  .gift .bow:after{content:"";position:absolute;left:20px;top:-7px;width:26px;height:23px;border:7px solid #fff0f6;border-radius:50% 50% 50% 5px;transform:rotate(125deg)}
+  .gift.opened .lid{transform:translateY(-38px) rotate(-9deg)}
+  .surprise{display:none;background:#fff5f9;border:1px solid #ffd0e1;border-radius:20px;padding:20px;margin:12px auto;max-width:520px}
+  .surprise.show{display:block;animation:enter .5s ease both}
+  .final-heart{font-size:4.5rem;animation:pulse 1.5s ease-in-out infinite;filter:drop-shadow(0 7px 10px #ffc1d8)}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  .footer{position:relative;z-index:1;text-align:center;color:#bd83a0;font-size:.78rem;padding:0 12px 20px}
+  .confetti{position:fixed;top:-15px;z-index:20;pointer-events:none;animation:confettiFall 2.5s ease-in forwards;font-size:18px}
+  @keyframes confettiFall{to{transform:translateY(110vh) rotate(600deg);opacity:0}}
+  .nav-dots{display:flex;justify-content:center;gap:8px;margin-top:23px}
+  .dot{width:8px;height:8px;border-radius:50%;background:#f5c2d6;transition:all .3s}
+  .dot.active{width:24px;border-radius:10px;background:#e95a91}
+  @media(max-width:480px){.card{min-height:500px;border-radius:24px;padding:28px 19px}.btn{padding:12px 18px}.envelope{transform:scale(.9)}}
+  @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="petals" id="petals"></div>
+<div class="hearts" id="hearts"></div>
+<div class="topline">A little note from my heart 💌</div>
+<div class="progress-wrap" aria-label="Website progress"><div class="progress" id="progress"></div></div>
+
+<main>
+<div class="card">
+  <section class="layer active" data-layer="0">
+    <p class="eyebrow">A tiny surprise for you</p>
+    <div class="flower-hero">🌷💗🌸</div>
+    <h1>My Medam Ji</h1>
+    <p>Today, I have something from my heart that I want to tell you.</p>
+    <p class="small">No pressure, no rush. Just a little message made with love.</p>
+    <div class="btn-row"><button class="btn" onclick="goTo(1)">Open your surprise 💌</button></div>
+    <div class="tiny-note">Made especially for you, Medam Ji 🌸</div>
+  </section>
+
+  <section class="layer" data-layer="1">
+    <p class="eyebrow">Layer 2 · A letter for you</p>
+    <h2>Can you open this? 💌</h2>
+    <p>There are a few words I want you to read. Tap the envelope.</p>
+    <div class="envelope-wrap">
+      <button class="envelope" id="envelope" aria-label="Open apology letter" onclick="openLetter()">
+        <div class="env-back"></div><div class="env-paper"><span>For Medam Ji 💗</span></div>
+        <div class="env-front"></div><div class="env-flap"></div>
+      </button>
+    </div>
+    <div class="letter" id="letter">
+      <p><strong>My dear Medam Ji,</strong></p>
+      <p>I’m sorry that I couldn’t give you the time and attention you wanted today. I went out with my friends, and I had told you beforehand, but I understand that knowing about it doesn’t necessarily make you feel less hurt when you miss me.</p>
+      <p>I never want you to feel that you don’t matter to me. I should have made a better effort to stay connected and give you some meaningful time. I’m sorry for making your heart feel heavy. 💗</p>
+      <p>With love,<br><strong>Your person 🌷</strong></p>
+    </div>
+    <div class="btn-row"><button class="btn secondary" onclick="goTo(0)">← Back</button><button class="btn" onclick="goTo(2)">Read one more thing 💕</button></div>
+  </section>
+
+  <section class="layer" data-layer="2">
+    <p class="eyebrow">Layer 3 · You matter to me</p>
+    <h2>You're special, Medam Ji 🌸</h2>
+    <div class="quote">“You deserve to feel loved, heard, and important, not just through words, but through the time and care I show you.”</div>
+    <div class="memory-box">
+      <div class="emoji">🩷🌷🩷</div>
+      <p>I know I can’t turn back today and give you those moments again. But I can listen to how you felt, learn from this, and try to do better next time.</p>
+    </div>
+    <p>I may not always get everything right, but your feelings are important to me. I want us to talk honestly and understand each other, even when one of us feels upset.</p>
+    <div class="btn-row"><button class="btn secondary" onclick="goTo(1)">← Back</button><button class="btn" onclick="goTo(3)">There's a little gift 🎁</button></div>
+  </section>
+
+  <section class="layer" data-layer="3">
+    <p class="eyebrow">Layer 4 · A little surprise</p>
+    <h2>A tiny box, full of love 🎁</h2>
+    <p>Tap the gift box and let a few flowers say what words sometimes can't.</p>
+    <div class="gift-area">
+      <button class="gift" id="gift" aria-label="Open surprise gift" onclick="openGift()">
+        <span class="box"></span><span class="ribbon"></span><span class="lid"></span><span class="bow"></span>
+      </button>
+    </div>
+    <div class="surprise" id="surprise">
+      <div style="font-size:2.4rem">🌸🌷💐🌷🌸</div>
+      <h2 style="font-size:1.8rem">Flowers for your beautiful heart</h2>
+      <p>If I could, I’d send you a little bouquet with this message: “I’m sorry, Medam Ji. You matter to me, and I want to make more thoughtful time for us.”</p>
+      <p>🌼 🌷 💗 🌹 💗 🌷 🌼</p>
+    </div>
+    <div class="btn-row"><button class="btn secondary" onclick="goTo(2)">← Back</button><button class="btn" onclick="goTo(4)">One last message 💖</button></div>
+  </section>
+
+  <section class="layer" data-layer="4">
+    <p class="eyebrow">Layer 5 · From my heart</p>
+    <div class="final-heart">💗</div>
+    <h2>I'm sorry, Medam Ji.</h2>
+    <p>I’m sorry that today left you feeling sad. I did tell you I was going out with my friends, but I understand that you also wanted time with me. I should have been more thoughtful about that.</p>
+    <p>I’m not asking you to stop feeling upset right away or to forgive me just because I made this website. I just want you to know that I care about you, I’m listening, and I’ll try to show that care better with my actions.</p>
+    <div class="quote">“You matter to me, Medam Ji. I hope we can talk when you feel ready.”</div>
+    <div class="btn-row"><button class="btn secondary" onclick="goTo(3)">← Back</button><button class="btn" onclick="finalSurprise()">Send you a flower 🌷</button><button class="btn secondary" onclick="goTo(0)">Read again ↺</button></div>
+    <p class="small" id="finalNote" aria-live="polite"></p>
+  </section>
+  <div class="nav-dots" aria-label="Layer navigation">
+    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+</div>
+</main>
+<div class="footer">A little website, made with care 💗</div>
+
+<script>
+  const layers = [...document.querySelectorAll('.layer')];
+  const dots = [...document.querySelectorAll('.dot')];
+  const progress = document.getElementById('progress');
+  let current = 0;
+  function goTo(index){
+    current = Math.max(0, Math.min(4, index));
+    layers.forEach((layer,i)=>layer.classList.toggle('active',i===current));
+    dots.forEach((dot,i)=>dot.classList.toggle('active',i===current));
+    progress.style.width = ((current+1)*20)+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(current===3) flowerConfetti(10);
+  }
+  function openLetter(){
+    document.getElementById('envelope').classList.add('open');
+    document.getElementById('letter').classList.add('show');
+    flowerConfetti(8);
+  }
+  function openGift(){
+    document.getElementById('gift').classList.add('opened');
+    document.getElementById('surprise').classList.add('show');
+    flowerConfetti(28);
+  }
+  function finalSurprise(){
+    document.getElementById('finalNote').textContent = '🌷 A little flower, and a sincere apology. Take all the time you need. 💗';
+    flowerConfetti(38);
+  }
+  function flowerConfetti(count){
+    const items=['🌸','🌷','💗','✨','🌼','💕'];
+    for(let i=0;i<count;i++){
+      const el=document.createElement('span');
+      el.className='confetti';
+      el.textContent=items[Math.floor(Math.random()*items.length)];
+      el.style.left=Math.random()*100+'vw';
+      el.style.animationDelay=(Math.random()*.8)+'s';
+      el.style.fontSize=(14+Math.random()*16)+'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),3500);
+    }
+  }
+  const petalArea=document.getElementById('petals');
+  for(let i=0;i<20;i++){
+    const p=document.createElement('span');p.className='petal';
+    p.textContent=['🌸','🌷','✿','❀'][Math.floor(Math.random()*4)];
+    p.style.left=Math.random()*100+'vw';
+    p.style.animationDuration=(9+Math.random()*12)+'s';
+    p.style.animationDelay=(-Math.random()*18)+'s';
+    p.style.fontSize=(14+Math.random()*14)+'px';
+    petalArea.appendChild(p);
+  }
+  const heartArea=document.getElementById('hearts');
+  for(let i=0;i<10;i++){
+    const h=document.createElement('span');h.className='heart-float';
+    h.textContent=['♡','♥','💗'][Math.floor(Math.random()*3)];
+    h.style.left=Math.random()*100+'vw';
+    h.style.animationDuration=(10+Math.random()*14)+'s';
+    h.style.animationDelay=(-Math.random()*18)+'s';
+    h.style.fontSize=(14+Math.random()*20)+'px';
+    h.style.color='#ee86b0';
+    heartArea.appendChild(h);
+  }
+</script>
+</body>
+</html>
